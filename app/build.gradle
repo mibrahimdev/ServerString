@@ -30,7 +30,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
+    implementation 'com.squareup.moshi:moshi:1.6.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation project(':server-string-annotations')
 }
