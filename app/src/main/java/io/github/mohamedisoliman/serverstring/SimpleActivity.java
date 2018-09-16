@@ -32,9 +32,9 @@ public class SimpleActivity extends AppCompatActivity {
         text1.setText(name);
 
         TextView text2 = findViewById(R.id.text_2);
-        text2.setText(name);
+        text2.setText(age);
 
         TextView text3 = findViewById(R.id.text_3);
-        text3.setText(name);
+        text3.setText(description);
     }
 }
