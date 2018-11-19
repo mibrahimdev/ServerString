@@ -12,27 +12,26 @@ import io.github.mohamedisoliman.server_string_annotations.ServerString;
  */
 public class SimpleActivity extends AppCompatActivity {
 
-    @ServerString("MOHAMED")
-    String name;
+    @ServerString("title")
+    public String title;
 
-    @ServerString("28")
-    String age;
+    @ServerString("para")
+    public String para;
 
-    @ServerString("Android developer")
-    String description;
-
+    @ServerString("GlossTerm")
+    public String description;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DynamicString.bind(this);
+        DynamicString.Companion.bind(this);
 
         TextView text1 = findViewById(R.id.text_1);
-        text1.setText(name);
+        text1.setText(title);
 
         TextView text2 = findViewById(R.id.text_2);
-        text2.setText(age);
+        text2.setText(para);
 
         TextView text3 = findViewById(R.id.text_3);
         text3.setText(description);
