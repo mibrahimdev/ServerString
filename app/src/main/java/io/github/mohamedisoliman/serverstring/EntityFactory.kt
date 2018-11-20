@@ -11,7 +11,7 @@ object EntityFactory {
 
     fun getSampleModel(): ExamModel {
         val gson = Gson()
-        val examModel = gson.fromJson(ExamJson.jsonSource, ExamModel::class.java)
+        val examModel = gson.fromJson(JsonSample.jsonSource, ExamModel::class.java)
         return examModel;
     }
 

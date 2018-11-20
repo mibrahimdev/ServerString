@@ -1,6 +1,8 @@
 package io.github.mohamedisoliman.serverstring
 
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.google.gson.JsonPrimitive
 import com.google.gson.annotations.SerializedName
 import io.github.mohamedisoliman.server_string_annotations.ServerString
 import timber.log.Timber
@@ -61,10 +63,6 @@ class DynamicString private constructor(private val target: Any) {
     }
   }
 
-  private fun toMap(jsoObject: JsonObject): HashMap<String, Any> {
-    TODO()
-  }
-
   companion object {
 
     fun bind(activity: Any) {
@@ -76,5 +74,44 @@ class DynamicString private constructor(private val target: Any) {
       }
 
     }
+
+    fun flattenJson(
+      root: JsonObject,
+      dictionary: HashMap<String, String>,
+      prefix: String = ""
+    ) {
+      root.entrySet()
+          .forEach { entry ->
+            val key = entry.key
+            val value = entry.value
+            when {
+              value is JsonObject -> flattenJson(value, dictionary, "${prefix}_$key")
+              value is JsonArray -> flattenJsonArray(value, dictionary)
+              value is JsonPrimitive && value.isString ->
+                addToDictionary(dictionary, "${prefix}_$key", value)
+              else -> return@forEach
+            }
+          }
+    }
+
+    private fun addToDictionary(
+      dictionary: HashMap<String, String>,
+      key: String,
+      value: JsonPrimitive
+    ) {
+      dictionary += key to value.asString
+    }
+
+    private fun flattenJsonArray(
+      jsonArray: JsonArray,
+      dictionary: HashMap<String, String>,
+      prefix: String = ""
+    ) {
+      jsonArray.forEach {
+        if (it is JsonObject) flattenJson(it, dictionary, prefix)
+        else if (it is JsonArray) flattenJsonArray(it, dictionary)
+      }
+    }
+
   }
 }
