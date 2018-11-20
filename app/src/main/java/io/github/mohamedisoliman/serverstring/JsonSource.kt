@@ -123,18 +123,4 @@ object JsonSample {
     "taglib-location": "/WEB-INF/tlds/cofax.tld"}}}
   """.trimIndent()
 
-  val json = """
-                {"entitlement":[{"id":"mainBalance","currentValue":"0",
-                "unitType":"CENTS","expiryDate":"2019-10-16"},{"id":"VF_DOL_REP_BDL",
-                "currentValue":"10000","unitType":"CENTS","expiryDate":"2018-10-23"},
-                {"id":"VF_DATA_REP_BDL","currentValue":"153600","unitType":"KB",
-                "expiryDate":"2018-10-23"},{"id":"VF_DOL_V2V_REP_BDL",
-                "currentValue":"0","unitType":"CENTS","expiryDate":"2018-10-23"},
-                {"id":"VF_TXT_REP_BDL","currentValue":"0","unitType":"UNIT",
-                "expiryDate":"2018-10-16"},{"id":"VF_MIN_REP_BDL","currentValue":"0",
-                "unitType":"SECONDS","expiryDate":"2018-10-23"},{"id":"VF_WALLET_DOL_BDL",
-                "currentValue":"1500","unitType":"CENTS","expiryDate":"2019-08-11"}],
-                "masterReceiptNumber":"08853285","status":"Recharge successful","commercialOffer":"VF_CAPTWO_CO"}
-            """.trimIndent()
-
 }
