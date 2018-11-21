@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-
 import io.github.mohamedisoliman.server_string_annotations.ServerString;
 
 /**
@@ -12,28 +11,29 @@ import io.github.mohamedisoliman.server_string_annotations.ServerString;
  */
 public class SimpleActivity extends AppCompatActivity {
 
-    @ServerString("title")
-    public String title;
+  @ServerString("_glossary_title")
+  public String title;
 
-    @ServerString("para")
-    public String para;
+  @ServerString("_glossary_GlossDiv_GlossList_GlossEntry_SortAs")
+  public String para;
 
-    @ServerString("GlossTerm")
-    public String description;
+  @ServerString("_glossary_GlossDiv_title")
+  public String description;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        DynamicString.Companion.bind(this);
+  @Override
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
 
-        TextView text1 = findViewById(R.id.text_1);
-        text1.setText(title);
+    DynamicString.bind(this);
 
-        TextView text2 = findViewById(R.id.text_2);
-        text2.setText(para);
+    TextView text1 = findViewById(R.id.text_1);
+    text1.setText(title);
 
-        TextView text3 = findViewById(R.id.text_3);
-        text3.setText(description);
-    }
+    TextView text2 = findViewById(R.id.text_2);
+    text2.setText(para);
+
+    TextView text3 = findViewById(R.id.text_3);
+    text3.setText(description);
+  }
 }
