@@ -1,1 +1,1 @@
-include ':app', ':server-string-annotations', ':server-string-processor'
+include ':app', ':server-string-annotations', ':server-string-processor', ':binder'

@@ -4,36 +4,25 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-import io.github.mohamedisoliman.server_string_annotations.ServerString;
+import io.github.mohamedisoliman.binder.ServerString;
+import io.github.mohamedisoliman.server_string_annotations.DynamicString;
 
 /**
  * Created by Mohamed Ibrahim on 9/17/18.
  */
 public class SimpleActivity extends AppCompatActivity {
 
-  @ServerString("_glossary_title")
-  public String title;
-
-  @ServerString("_glossary_GlossDiv_GlossList_GlossEntry_SortAs")
-  public String para;
-
-  @ServerString("_glossary_GlossDiv_title")
-  public String description;
+  @DynamicString(serverKey = "_glossary_title", viewId = R.id.text_2)
+  TextView textView1;
+  @DynamicString(serverKey = "_glossary_GlossDiv_GlossList_GlossEntry_SortAs", viewId = R.id.text_2)
+  TextView textView2;
+  @DynamicString(serverKey = "_glossary_GlossDiv_title", viewId = R.id.text_3)
+  TextView textView3;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
-    DynamicString.bind(this);
-
-    TextView text1 = findViewById(R.id.text_1);
-    text1.setText(title);
-
-    TextView text2 = findViewById(R.id.text_2);
-    text2.setText(para);
-
-    TextView text3 = findViewById(R.id.text_3);
-    text3.setText(description);
+    ServerString.bind(this);
   }
 }

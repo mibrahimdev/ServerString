@@ -31,6 +31,7 @@ object JsonSample {
         }
     """.trimIndent()
 
+  @JvmStatic
   val json2 = """
 
     {"web-app": {
