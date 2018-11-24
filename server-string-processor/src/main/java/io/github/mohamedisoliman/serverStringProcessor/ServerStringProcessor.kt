@@ -47,24 +47,18 @@ class ServerStringProcessor : AbstractProcessor() {
 
       // find all the classes that uses the supported annotations
       val typeElements = HashSet<TypeElement>()
-      for (element in roundEnvironment.rootElements) {
-        if (element is TypeElement) {
-          var found = false
-          for (subElement in element.getEnclosedElements()) {
-            for (mirror in subElement.annotationMirrors) {
-              for (annotation in supportedAnnotations) {
-                if (mirror.annotationType.asElement() == annotation) {
-                  typeElements.add(element)
-                  found = true
-                  break
-                }
+      roundEnvironment.rootElements
+          .filter { it is TypeElement }
+          .forEach { item ->
+            item.enclosedElements.forEach { subElement ->
+              subElement.annotationMirrors.forEach { mirror ->
+                supportedAnnotations.filter { mirror.annotationType.asElement() == it }
+                    .forEach {
+                      typeElements.add(item as TypeElement)
+                    }
               }
-              if (found) break
             }
-            if (found) break
           }
-        }
-      }
 
       messager?.printMessage(Diagnostic.Kind.WARNING, typeElements.size.toString())
 
@@ -86,7 +80,6 @@ class ServerStringProcessor : AbstractProcessor() {
         // define the wrapper class
         val classBuilder = TypeSpec.classBuilder(generatedClassName)
             .addModifiers(Modifier.PUBLIC)
-
 
         // add constructor
         classBuilder.addMethod(
