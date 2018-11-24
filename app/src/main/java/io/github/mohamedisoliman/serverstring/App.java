@@ -10,6 +10,7 @@ public class App extends Application {
 
   @Override public void onCreate() {
     super.onCreate();
-    ServerString.setJson(JsonSample.getJson2());
+    ServerString.getInstance()
+        .setJson(JsonSample.getJsonSource());
   }
 }

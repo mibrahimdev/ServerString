@@ -12,7 +12,7 @@ import io.github.mohamedisoliman.server_string_annotations.DynamicString;
  */
 public class SimpleActivity extends AppCompatActivity {
 
-  @DynamicString(serverKey = "_glossary_title", viewId = R.id.text_2)
+  @DynamicString(serverKey = "_glossary_title", viewId = R.id.text_1)
   TextView textView1;
   @DynamicString(serverKey = "_glossary_GlossDiv_GlossList_GlossEntry_SortAs", viewId = R.id.text_2)
   TextView textView2;

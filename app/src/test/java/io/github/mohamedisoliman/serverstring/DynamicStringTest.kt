@@ -2,6 +2,7 @@ package io.github.mohamedisoliman.serverstring
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import io.github.mohamedisoliman.binder.ServerString
 import org.junit.Test
 
 /**
@@ -41,9 +42,10 @@ class DynamicStringTest {
   @Test
   fun testFlattenJson() {
     val hashMap = HashMap<String, String>()
-    DynamicString.flattenJson(
-        Gson().fromJson(JsonSample.json2, JsonObject::class.java), hashMap
-    )
+    ServerString.getInstance()
+        .flattenJson(
+            Gson().fromJson(JsonSample.jsonSource, JsonObject::class.java), hashMap
+        )
     println(Gson().toJson(hashMap))
   }
 

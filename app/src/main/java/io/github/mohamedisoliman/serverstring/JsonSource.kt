@@ -6,6 +6,7 @@ package io.github.mohamedisoliman.serverstring
  */
 object JsonSample {
 
+  @JvmStatic
   val jsonSource = """
         {
         	"glossary": {

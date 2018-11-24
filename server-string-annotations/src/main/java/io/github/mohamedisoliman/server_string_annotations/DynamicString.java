@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 /**
  * Created by Mohamed Ibrahim on 9/17/18.
  */
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 @Target({ ElementType.FIELD, ElementType.METHOD })
 public @interface DynamicString {
 

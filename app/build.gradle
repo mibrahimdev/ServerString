@@ -38,5 +38,6 @@ dependencies {
   implementation "io.reactivex.rxjava2:rxjava:2.2.3"
 
   implementation project(':binder')
-  implementation project(path: ':server-string-annotations')
+  annotationProcessor project(':server-string-processor')
+
 }

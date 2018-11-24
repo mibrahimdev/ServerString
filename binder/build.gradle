@@ -32,9 +32,7 @@ dependencies {
   implementation 'com.squareup.moshi:moshi:1.6.0'
   implementation 'com.google.code.gson:gson:2.8.5'
 
-  implementation project(':server-string-annotations')
-  annotationProcessor project(':server-string-processor')
-
+  api project(':server-string-annotations')
 }
 repositories {
   mavenCentral()

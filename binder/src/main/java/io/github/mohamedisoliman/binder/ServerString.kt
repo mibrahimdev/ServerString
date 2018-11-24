@@ -15,28 +15,26 @@ class ServerString private constructor() {
 
   private lateinit var json: String
 
-  init {
+  fun setJson(json: String) {
+    INSTANCE?.json = json
     flattenJson(json)
   }
 
   companion object {
+    var INSTANCE: ServerString? = null
     const val suffix: String = "_ServerStringBinding"
     private val gson = Gson()
     private val serverDictionary: HashMap<String, String> = HashMap()
 
-    private var INSTANCE: ServerString? = null
+    @JvmStatic
+    fun getStringValue(key: String) = serverDictionary[key]
 
     @JvmStatic
-    fun createServerString(): ServerString {
+    fun getInstance(): ServerString {
       if (INSTANCE == null) {
         INSTANCE = ServerString()
       }
       return INSTANCE as ServerString
-    }
-
-    @JvmStatic
-    fun setJson(json: String) {
-      INSTANCE?.json = json
     }
 
     @JvmStatic
@@ -52,7 +50,7 @@ class ServerString private constructor() {
 
         val classConstructor = bindingClass.getConstructor(targetClass)
         try {
-          classConstructor.newInstance(target, serverDictionary)
+          classConstructor.newInstance(target)
         } catch (e: IllegalAccessException) {
           throw RuntimeException("Unable to invoke $classConstructor", e)
         } catch (e: InstantiationException) {
@@ -78,12 +76,13 @@ class ServerString private constructor() {
 
   }
 
-  private fun flattenJson(json: String) {
+  fun flattenJson(json: String) {
     val fromJson = gson.fromJson(json, JsonObject::class.java)
+    serverDictionary.clear()
     flattenJson(fromJson, serverDictionary)
   }
 
-  private fun flattenJson(
+  public fun flattenJson(
     root: JsonObject,
     dictionary: HashMap<String, String>,
     prefix: String = ""
