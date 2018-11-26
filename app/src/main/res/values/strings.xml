@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ServerString</string>
+
+    <string name="server_key_glossary_title">_glossary_title</string>
+    <string name="server_key_sort_as">_glossary_GlossDiv_GlossList_GlossEntry_SortAs</string>
+    <string name="server_key_glossdiv_title">_glossary_GlossDiv_title</string>
 </resources>

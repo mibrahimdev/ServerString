@@ -81,12 +81,14 @@ class ServerStringProcessor : AbstractProcessor() {
         val classBuilder = TypeSpec.classBuilder(generatedClassName)
             .addModifiers(Modifier.PUBLIC)
 
+        val targetParamName = "target"
+
         // add constructor
         classBuilder.addMethod(
             MethodSpec.constructorBuilder()
                 .addModifiers(Modifier.PUBLIC)
-                .addParameter(className, "target")
-                .addStatement("\$N(\$N)", "bindServerStrings", "target")
+                .addParameter(className, targetParamName)
+                .addStatement("\$N(\$N)", "bindServerStrings", targetParamName)
                 .build()
         )
 
@@ -95,18 +97,19 @@ class ServerStringProcessor : AbstractProcessor() {
         val bindViewsMethodBuilder = MethodSpec.methodBuilder("bindServerStrings")
             .addModifiers(Modifier.PRIVATE)
             .returns(Void.TYPE)
-            .addParameter(className, "target")
+            .addParameter(className, targetParamName)
 
         ElementFilter.fieldsIn(it.enclosedElements)
             .forEach { variableElement ->
               val bindView = variableElement.getAnnotation(DynamicString::class.java)
               if (bindView != null) {
                 bindViewsMethodBuilder.addStatement(
-                    "((\$T)\$N.findViewById(\$L)).setText(\$T.getStringValue(\$S))",
+                    "((\$T)\$N.findViewById(\$L)).setText(\$T.getStringValue(\$N.getString(\$L)))",
                     variableElement,
-                    "target",
+                    targetParamName,
                     bindView.viewId,
                     ClassName.get("io.github.mohamedisoliman.binder", "ServerString"),
+                    targetParamName,
                     bindView.serverKey
                 )
               }
