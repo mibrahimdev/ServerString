@@ -26,10 +26,10 @@ import javax.tools.Diagnostic
  */
 class ServerStringProcessor : AbstractProcessor() {
 
-  private var messager: Messager? = null
-  private var typesUtil: Types? = null
-  private var elementsUtil: Elements? = null
-  private var filer: Filer? = null
+  private lateinit var messager: Messager
+  private lateinit var typesUtil: Types
+  private lateinit var elementsUtil: Elements
+  private lateinit var filer: Filer
 
   @Synchronized override fun init(processingEnv: ProcessingEnvironment) {
     super.init(processingEnv)
@@ -60,12 +60,12 @@ class ServerStringProcessor : AbstractProcessor() {
             }
           }
 
-      messager?.printMessage(Diagnostic.Kind.WARNING, typeElements.size.toString())
+      messager.printMessage(Diagnostic.Kind.WARNING, typeElements.size.toString())
 
       //create the wrapper class
       typeElements.forEach {
 
-        val packageName = elementsUtil?.getPackageOf(it)
+        val packageName = elementsUtil.getPackageOf(it)
             ?.qualifiedName.toString()
 
         val typeName = it.simpleName
@@ -75,7 +75,7 @@ class ServerStringProcessor : AbstractProcessor() {
         val generatedClassName = ClassName
             .get(packageName, "${typeName}_ServerStringBinding")
 
-        messager?.printMessage(Diagnostic.Kind.WARNING, typeName)
+        messager.printMessage(Diagnostic.Kind.WARNING, typeName)
 
         // define the wrapper class
         val classBuilder = TypeSpec.classBuilder(generatedClassName)
@@ -124,7 +124,7 @@ class ServerStringProcessor : AbstractProcessor() {
               .build()
               .writeTo(filer)
         } catch (e: IOException) {
-          messager?.printMessage(Diagnostic.Kind.ERROR, e.toString(), it)
+          messager.printMessage(Diagnostic.Kind.ERROR, e.toString(), it)
         }
 
       }
