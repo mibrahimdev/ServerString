@@ -3,7 +3,7 @@ jdk:
   - oraclejdk8
 android:
   components:
-    - tools # to get the new `repository-11.xml`
+    - tools
     - platform-tools
     - build-tools-28.0.0
     - android-28
@@ -12,6 +12,9 @@ android:
 - extra-android-m2repository
 licenses:
     - 'android-sdk-license-.+'
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 before_install:
 - yes | sdkmanager "platforms;android-28"
 script:
