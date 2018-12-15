@@ -17,7 +17,6 @@ licenses:
     - 'google-gdk-license-.+'
 before_install:
     - yes | sdkmanager "platforms;android-28"
-    - yes | sdkmanager --licenses
 script:
    - ./gradlew build connectedCheck
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
