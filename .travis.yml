@@ -18,5 +18,3 @@ licenses:
 before_install:
     - yes | sdkmanager "platforms;android-28"
 script:
-   - ./gradlew build connectedCheck
-after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
