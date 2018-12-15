@@ -5,18 +5,19 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-28.0.0
+    - build-tools-28.0.3
     - android-28
     - extra-android-support
     - extra-google-m2repository
-- extra-android-m2repository
+    - extra-android-m2repository
 licenses:
     - 'android-sdk-license-.+'
     - 'android-sdk-preview-license-.+'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 before_install:
-- yes | sdkmanager "platforms;android-28"
+    - yes | sdkmanager "platforms;android-28"
+    - yes | sdkmanager --licenses
 script:
    - ./gradlew build connectedCheck
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
