@@ -19,3 +19,7 @@ Then in your Activity annotate your TextView with key and View resource Id
 @DynamicString(serverKey = R.string.server_key_glossdiv_title, viewId = R.id.text_3)
   TextView textView3;
 ```
+Then in Activity onCreate call     
+```java
+ServerString.bind(this);
+```
